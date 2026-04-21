@@ -1,24 +1,19 @@
-// your code here
 const button = document.getElementById("button");
 
-        button.addEventListener("click", function () {
-            const name = document.getElementById("name").value.trim();
-            const year = document.getElementById("year").value.trim();
+button.addEventListener("click", function () {
+    const name = document.getElementById("name").value.trim();
+    const year = document.getElementById("year").value.trim();
 
-            let baseUrl = "https://localhost:8080/";
-            let params = [];
+    let url = "https://localhost:8080/";
+    let params = [];
 
-            if (name) {
-                params.push("name=" + encodeURIComponent(name));
-            }
+    // encodeURIComponent hata diya hai taaki space space hi rahe
+    if (name) params.push("name=" + name); 
+    if (year) params.push("year=" + year);
 
-            if (year) {
-                params.push("year=" + encodeURIComponent(year));
-            }
+    if (params.length > 0) {
+        url += "?" + params.join("&");
+    }
 
-            if (params.length > 0) {
-                baseUrl += "?" + params.join("&");
-            }
-
-            document.getElementById("url").textContent = baseUrl;
-        });
+    document.getElementById("url").textContent = url;
+});
